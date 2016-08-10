@@ -1,3 +1,3 @@
 get '/' do
-#index controller
+#index
 end
