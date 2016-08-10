@@ -2,7 +2,6 @@ get '/users/new' do
   erb :'/users/new'
 end
 
-
 post '/users' do
   user = User.new(params[:user])
 
@@ -23,7 +22,6 @@ post '/login' do
   if @user
     session[:user_id] = @user.id
   else
-    p "WRONG"
     redirect '/login'
   end
   redirect '/questions'
@@ -32,4 +30,11 @@ end
 get '/logout' do
   session[:user_id] = nil
   redirect '/questions'
+end
+
+get '/users/:id' do
+  user = User.find_by(id: params[:id])
+  @questions = user.questions
+  @answers = user.answers
+  erb :'/users/show'
 end

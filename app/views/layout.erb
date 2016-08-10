@@ -24,7 +24,7 @@
       <ul class="no-bullets no-margin no-padding right">
         <% if session[:user_id] %>
           <li class="pipe-separate left"><a href="/">home</a></li>
-          <li class="pipe-separate left"><a href="/users/show">profile</a></li>
+          <li class="pipe-separate left"><a href="/users/<%= current_user.id %>"><%= current_user.user_name %></a></li>
           <li class="pipe-separate left"><a href="/logout">logout</a></li>
         <% else %>
           <li class="pipe-separate left"><a href="/">home</a></li>
