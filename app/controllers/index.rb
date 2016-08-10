@@ -1,3 +1,4 @@
 get '/' do
-#index
+  redirect '/questions'
 end
+
