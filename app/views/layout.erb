@@ -19,6 +19,22 @@
   <title>Plaque Overflow</title>
 </head>
 <body>
+  <header>
+    <div>
+      <ul class="no-bullets no-margin no-padding right">
+        <% if session[:user_id] %>
+          <li class="pipe-separate left"><a href="/">home</a></li>
+          <li class="pipe-separate left"><a href="/users/show">profile</a></li>
+          <li class="pipe-separate left"><a href="/logout">logout</a></li>
+        <% else %>
+          <li class="pipe-separate left"><a href="/">home</a></li>
+          <li class="pipe-separate left"><a href="/users/new">register</a></li>
+          <li class="pipe-separate left"><a href="/login">login</a></li>
+        <% end %>
+      </ul>
+    </div>
+  </header>
+
   <%= yield %>
 </body>
 </html>
