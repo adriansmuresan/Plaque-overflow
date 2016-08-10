@@ -1,0 +1,29 @@
+<h1><%= @question.title %></h1>
+<h4><%= @question.asker.user_name  %></h4>
+<p><%= @question.content %></p>
+<p>--COMMENTS--</p>
+<% @question.comments.each do |comment| %>
+<article>
+  <p class='username'>Author: <%= comment.commentator.user_name %><p>
+  <p> <%= comment.content %><p>
+</article>
+<% end %>
+<br>
+<p>--ANSWERS--</p>
+<% @question.answers.each do |answer| %>
+  <article id="<%= answer.id %>">
+    <form method="post" action='/posts/<%= answer.id %>/vote' class="inline">
+      <button type="submit" name="submit_param" value="submit_value" class="fa fa-sort-desc vote-button upvote-button"></button>
+    </form>
+      <span class='points'><%= answer.points %></span>
+      <span class='username'><%= answer.answerer.user_name %></span>
+      <span class='timestamp'><%= answer.time_since_creation %></span>
+  </article>
+      <p> <%= answer.content %></p>
+    <% answer.comments.each do |acomment| %>
+    <article>
+    <p> <% acomment.content %></p>
+    <p class='username'>Author: <%= acomment.commentator.user_name %></p>
+  </article>
+  <% end %>
+<% end %>
