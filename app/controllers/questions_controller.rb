@@ -3,6 +3,6 @@ get '/questions' do
   erb :'/questions/index'
 end
 
-get '/questions/:id'
+get '/questions/:id' do
 
 end
