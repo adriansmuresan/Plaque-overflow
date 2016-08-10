@@ -1,8 +1,9 @@
+
 *, *:after, *:before {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-
+}
 /* nav bar */
 .pipe-separate {
   padding-left: 1em;
@@ -25,15 +26,15 @@
 }
 
 /* body */
-/*body {
+body {
   counter-reset:section;
   background-color: #F6F6EF;
   font-family: Verdana;
   max-width: 700px;
   margin: 0 auto;
-}*/
+}
 
-/*header {
+header {
   background-color: #F4712D;
   padding: 5px 5px;
 }
@@ -57,10 +58,11 @@ header p a {
 header p a:nth-child(n + 2):before {
   content: " | ";
 }
-*/
-/*article {
+
+ {
   margin: 5px 5px;
 }
+
 
 article a.vote-button {
   color: #8C8C8C;
@@ -152,4 +154,4 @@ form#posts input[type='submit'] {
   vertical-align: sub;
   padding: 1px 0px 0px 0px;
 }
-*/
+
