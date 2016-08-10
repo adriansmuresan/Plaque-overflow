@@ -2,6 +2,7 @@
 <h4><%= @question.asker.user_name  %></h4>
 <p><%= @question.content %></p>
 <p>--COMMENTS--</p>
+<button>Add Comment</button>
 <% @question.comments.each do |comment| %>
 <article>
   <p class='username'>Author: <%= comment.commentator.user_name %><p>
@@ -10,6 +11,7 @@
 <% end %>
 <br>
 <p>--ANSWERS--</p>
+<%= erb(:'_answer') %>
 <% @question.answers.each do |answer| %>
   <article id="<%= answer.id %>">
     <form method="post" action='/posts/<%= answer.id %>/vote' class="inline">
@@ -24,6 +26,7 @@
     <article>
     <p> <% acomment.content %></p>
     <p class='username'>Author: <%= acomment.commentator.user_name %></p>
+    <button>Add Comment</button>
   </article>
   <% end %>
 <% end %>
