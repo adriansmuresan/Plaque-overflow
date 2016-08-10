@@ -10,6 +10,7 @@
 <% end %>
 <br>
 <p>--ANSWERS--</p>
+<%= erb(:'_answer') %>
 <% @question.answers.each do |answer| %>
   <article id="<%= answer.id %>">
     <form method="post" action='/posts/<%= answer.id %>/vote' class="inline">

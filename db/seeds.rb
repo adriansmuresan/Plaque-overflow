@@ -3,7 +3,7 @@ require 'faker'
 5.times do
   user = { user_name: Faker::Internet.user_name,
          email: Faker::Internet.email,
-         password_hash: 'password' }
+         password: 'password' }
   User.create(user)
 end
 
