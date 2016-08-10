@@ -1,4 +1,4 @@
 get '/' do
-#index
-redirect '/users/new'
+  redirect '/questions'
 end
+
