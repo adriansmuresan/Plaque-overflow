@@ -1,0 +1,16 @@
+<p><%= current_user.user_name %>'s plaque page</p>
+
+<p>Questions you've asked:</p>
+
+<ul>
+  <% @questions.each do |question| %>
+    <li><a href="/questions/<%= question.id %>"><%= question.title %></a></li>
+  <% end %>
+</ul>
+
+<p>Questions you've answered:</p>
+<ul>
+  <% @answers.each do |answer| %>
+    <li><a href="/questions/<%= answer.question.id %>"><%= answer.question.title %></a></li>
+  <% end %>
+</ul>
