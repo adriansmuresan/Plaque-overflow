@@ -22,9 +22,10 @@
       <span class='timestamp'><%= answer.time_since_creation %></span>
   </article>
       <p> <%= answer.content %></p>
+      <p>--------------- answer comments ------------</p>
     <% answer.comments.each do |acomment| %>
     <article>
-    <p> <% acomment.content %></p>
+    <p> <%= acomment.content %></p>
     <p class='username'>Author: <%= acomment.commentator.user_name %></p>
     <button>Add Comment</button>
   </article>
