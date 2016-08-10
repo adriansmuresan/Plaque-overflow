@@ -8,8 +8,8 @@ get '/questions/:id' do
   erb :'questions/show'
 end
 
-post '/questions/:bannana/answers' do
-  answer = Answer.new(answerer_id: session[:user_id], question_id: params[:bannana], content: params[:content])
+post '/questions/:id/answers' do
+  answer = Answer.new(answerer_id: session[:user_id], question_id: params[:id], content: params[:content])
   if answer.save
     redirect "/questions/#{answer.question_id}"
   end
