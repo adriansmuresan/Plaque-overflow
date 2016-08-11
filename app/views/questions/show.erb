@@ -1,15 +1,25 @@
 <h1><%= @question.title %></h1>
 <h4><%= @question.asker.user_name  %></h4>
 <p><%= @question.content %></p>
-  <div>
+
+<div>
+  <% if @question.asker.id == session[:user_id] %>
+    <a class='edit-delete' href="/questions/<%= @question.id %>/edit">Edit</a>
+    <form class = 'edit-delete' action='' method='post'>
+      <input type='hidden' name='_method' value='Delete'>
+      <input type='submit' value='delete'>
+    </form>
+  <% end %>
+
    <form method="post" action='/questions/<%= @question.id %>/votes' class="inline">
       <button type="submit" name="value" value="1" class="fa fa-sort-desc vote-button upvote-button <%= if @q_votes != nil && @q_votes.length > 0 && @q_votes[0].value == 1 then "used_upvote" end %>" ></button>
     </form>
     <form method="post" action='/questions/<%= @question.id %>/votes' class="inline">
       <button type="submit" name="value" value="-1" class="fa fa-sort-asc vote-button downvote-button <%= if @q_votes != nil && @q_votes.length > 0 && @q_votes[0].value == -1 then "used_downvote" end %>"></button>
       <span class='points'><%= @question.points %></span>
-      </form>
-  </div>
+    </form>
+</div>
+
 <p>--COMMENTS--</p>
 <form class='addcomment' method="post" action="/questions/<%=@question.id%>/comments" >
   <input type=text name="content" placeholder="Your Comment">
@@ -54,6 +64,15 @@
       <span class='timestamp'> Time since your post: <%= answer.time_since_creation %> hours</span>
   </article>
       <p> <%= answer.content %></p>
+      <% if answer.answerer_id == session[:user_id] %>
+        <form class = 'edit-delete' action='' method='get'>
+          <input type='submit' value='Edit'>
+        </form>
+        <form class = 'edit-delete' action='' method='post'>
+          <input type='hidden' name='_method' value='Delete'>
+          <input type='submit' value='delete'>
+        </form>
+      <% end %>
       <p>--------------- answer comments ------------</p>
     <% answer.comments.each do |acomment| %>
     <article>

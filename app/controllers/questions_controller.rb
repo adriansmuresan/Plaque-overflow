@@ -39,4 +39,19 @@ post '/questions' do
   erb :'/questions/index'
 end
 
+put '/questions/:id' do
+  @question = Question.find_by(id: params[:id])
+  @question.update(content: params[:content], title: params[:title])
+  redirect "/questions/#{ @question.id }"
+end
 
+delete '/questions/:id' do
+  @question = Question.find_by(id: params[:id])
+  @question.destroy
+  redirect '/questions'
+end
+
+get '/questions/:id/edit' do
+  @question = Question.find_by(id: params[:id])
+  erb :'/questions/edit'
+end
