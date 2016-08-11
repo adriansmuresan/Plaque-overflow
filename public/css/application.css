@@ -82,10 +82,10 @@ article h2 {
 }
 
 article:before {
-  counter-increment: section;
+ /* counter-increment: section;*/
   color: #8C8C8C;
   font-size: 10pt;
-  content: counter(section) ". ";
+  /*content: counter(section) ". ";*/
 }
 
 article h2 a {
@@ -159,3 +159,11 @@ form#posts input[type='submit'] {
   padding: 1px 0px 0px 0px;
 }
 
+.downvote-button{
+  background-color: transparent;
+  border: none;
+  padding-top: 5px;
+  color: #8C8C8C;
+  vertical-align: sub;
+  padding: 1px 0px 0px 0px;
+}

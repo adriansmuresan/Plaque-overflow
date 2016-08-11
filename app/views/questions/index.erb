@@ -2,8 +2,11 @@
   <% @questions.each do |question| %>
 
     <article id="<%= question.id %>">
-      <form method="post" action='/posts/<%= question.id %>/vote' class="inline">
-        <button type="submit" name="submit_param" value="submit_value" class="fa fa-sort-desc vote-button upvote-button"></button>
+         <form method="post" action='/questions/<%= question.id %>/votes' class="inline">
+      <button type="submit" name="value" value="1" class="fa fa-sort-desc vote-button upvote-button"></button>
+    </form>
+    <form method="post" action='/questions/<%= question.id %>/votes' class="inline">
+      <button type="submit" name="value" value="-1" class="fa fa-sort-asc vote-button downvote-button"></button>
       </form>
       <h2><a href='/questions/<%= question.id %>'><%= question.title %></a></h2>
       <p>
