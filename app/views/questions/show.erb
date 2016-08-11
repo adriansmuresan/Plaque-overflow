@@ -44,10 +44,8 @@
   </article>
       <p> <%= answer.content %></p>
       <% if answer.answerer_id == session[:user_id] %>
-        <form class = 'edit-delete' action='' method='get'>
-          <input type='submit' value='Edit'>
-        </form>
-        <form class = 'edit-delete' action='' method='post'>
+        <a href="/answers/<%= answer.id %>/edit">Edit</a>
+        <form class = 'edit-delete' action='/answers/<%= answer.id %>' method='post'>
           <input type='hidden' name='_method' value='Delete'>
           <input type='submit' value='delete'>
         </form>
