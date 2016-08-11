@@ -18,7 +18,7 @@ post '/answers/:id/votes' do
     @error = "must be logged in to vote!"
   end
   @questions = Question.all
-  erb :'/qeustions/index'
+  erb :'/questions/index'
 end
 
 put '/answers/:id' do
