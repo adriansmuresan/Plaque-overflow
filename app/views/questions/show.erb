@@ -2,10 +2,10 @@
 <h4><%= @question.asker.user_name  %></h4>
 <p><%= @question.content %></p>
    <form method="post" action='/questions/<%= @question.id %>/votes' class="inline">
-      <button type="submit" name="value" value="1" class="fa fa-sort-desc vote-button upvote-button"></button>
+      <button type="submit" name="value" value="1" class="fa fa-sort-desc vote-button upvote-button <%= if @q_votes.length > 0 && @q_votes[0].value == 1 then "used_upvote" end %>" ></button>
     </form>
     <form method="post" action='/questions/<%= @question.id %>/votes' class="inline">
-      <button type="submit" name="value" value="-1" class="fa fa-sort-asc vote-button downvote-button"></button>
+      <button type="submit" name="value" value="-1" class="fa fa-sort-asc vote-button downvote-button <%= if @q_votes.length > 0 && @q_votes[0].value == -1 then "used_downvote" end %>"></button>
       <span class='points'><%= @question.points %></span>
       </form>
 <p>--COMMENTS--</p>
@@ -26,14 +26,28 @@
 <% @question.answers.each do |answer| %>
   <article id="<%= answer.id %>">
     <form method="post" action='/answers/<%= answer.id %>/votes' class="inline">
-      <button type="submit" name="value" value="1" class="fa fa-sort-desc vote-button upvote-button"></button>
+      <button type="submit" name="value" value="1" class="fa fa-sort-desc vote-button upvote-button <%
+        if @filtered_a_votes.length > 0
+          @filtered_a_votes.each do |vote|
+            if vote.value == 1 && vote.votable_id == answer.id%>
+              used_upvote
+            <%end
+          end
+        end %>"></button>
     </form>
     <form method="post" action='/answers/<%= answer.id %>/votes' class="inline">
-      <button type="submit" name="value" value="-1" class="fa fa-sort-asc vote-button downvote-button"></button>
+      <button type="submit" name="value" value="-1" class="fa fa-sort-asc vote-button downvote-button <%
+        if @filtered_a_votes.length > 0
+          @filtered_a_votes.each do |vote|
+            if vote.value == -1 && vote.votable_id == answer.id%>
+              used_downvote
+            <%end
+          end
+        end %>"></button>
     </form>
       <span class='points'><%= answer.points %></span>
       <span class='username'><%= answer.answerer.user_name %></span>
-      <span class='timestamp'><%= answer.time_since_creation %></span>
+      <span class='timestamp'> Time since your post: <%= answer.time_since_creation %> hours</span>
   </article>
       <p> <%= answer.content %></p>
       <p>--------------- answer comments ------------</p>

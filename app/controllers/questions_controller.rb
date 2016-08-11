@@ -4,6 +4,18 @@ get '/questions' do
 end
 
 get '/questions/:id' do
+  if session[:user_id]
+    @q_votes = Vote.where(voter_id: session[:user_id], votable_id: params[:id], votable_type: "Question")
+    a_votes = Vote.where(voter_id: session[:user_id], votable_type: "Answer")
+    if a_votes
+      @filtered_a_votes = []
+      a_votes.each do |vote|
+        if vote.votable.question_id == params[:id].to_i
+          @filtered_a_votes << vote
+        end
+      end
+    end
+  end
   @question = Question.find(params[:id])
   erb :'questions/show'
 end
