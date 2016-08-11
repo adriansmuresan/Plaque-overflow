@@ -6,7 +6,6 @@ post '/questions/:id/answers' do
   end
 end
 
-
 post '/answers/:id/votes' do
   if session[:user_id]
     vote = Vote.new(voter_id: session[:user_id], votable_id: params[:id], votable_type: "Answer", value: params[:value])

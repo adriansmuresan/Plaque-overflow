@@ -12,7 +12,7 @@ post '/questions/:id/votes' do
     elsif oldvote && oldvote.value == -(params[:value].to_i)
       oldvote.destroy
       redirect "/questions/#{params[:id]}"
-    else  
+    else
       vote = Vote.new(voter_id: session[:user_id], votable_id: params[:id], votable_type: "Question", value: params[:value].to_i)
       if vote.save
         redirect "/questions/#{vote.votable_id}"
@@ -29,7 +29,7 @@ end
 
 post '/answers/:id/votes' do
   if session[:user_id]
-    oldvotes = Vote.where(voter_id: session[:user_id], votable_id: params[:id], votable_type: "Question")
+    oldvotes = Vote.where(voter_id: session[:user_id], votable_id: params[:id], votable_type: "Answer")
     if oldvotes.length > 1
       @error = "OMG we already have multiple votes for this WTF"
     else
@@ -40,7 +40,7 @@ post '/answers/:id/votes' do
       ## this catch might later be used to remove an existing vote...?
     elsif oldvote && oldvote.value == -(params[:value].to_i)
       oldvote.destroy
-      redirect "/questions/#{params[:id]}"
+      redirect "/questions/#{oldvote.votable.question_id}"
     else
       vote = Vote.new(voter_id: session[:user_id], votable_id: params[:id], votable_type: "Answer", value: params[:value].to_i)
       if vote.save
