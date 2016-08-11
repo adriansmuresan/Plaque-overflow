@@ -40,11 +40,7 @@ end
 
 
 post '/answers/:id/votes' do
-  if request.xhr?
-    puts "\n\n\n AJAX! \n\n\n"
-  else
-    puts "\n\n\n not ajax :( \n\n\n"
-  end
+
   if session[:user_id]
     oldvotes = Vote.where(voter_id: session[:user_id], votable_id: params[:id], votable_type: "Answer")
     if oldvotes.length > 1
@@ -54,14 +50,23 @@ post '/answers/:id/votes' do
       end
       if oldvote && oldvote.value == params[:value].to_i
         @error = "you already voted that way on this item!"
-      ## this catch might later be used to remove an existing vote...?
     elsif oldvote && oldvote.value == -(params[:value].to_i)
       oldvote.destroy
-      redirect "/questions/#{oldvote.votable.question_id}"
+      if request.xhr?
+        content_type :json
+        return {new_score: Answer.find(params[:id]).points, new_vote: false}.to_json
+      else
+        redirect "/questions/#{oldvote.votable.question_id}"
+      end
     else
       vote = Vote.new(voter_id: session[:user_id], votable_id: params[:id], votable_type: "Answer", value: params[:value].to_i)
       if vote.save
-        redirect "/questions/#{vote.votable.question_id}"
+        if request.xhr?
+          content_type :json
+          return {new_score: Answer.find(params[:id]).points, new_vote: true}.to_json
+        else
+          redirect "/questions/#{vote.votable.question_id}"
+        end
       else
         @error = "could not create vote for some reason"
       end
