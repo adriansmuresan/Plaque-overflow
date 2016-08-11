@@ -1,8 +1,19 @@
 <h1><%= @question.title %></h1>
 <h4><%= @question.asker.user_name  %></h4>
 <p><%= @question.content %></p>
+   <form method="post" action='/questions/<%= @question.id %>/votes' class="inline">
+      <button type="submit" name="value" value="1" class="fa fa-sort-desc vote-button upvote-button"></button>
+    </form>
+    <form method="post" action='/questions/<%= @question.id %>/votes' class="inline">
+      <button type="submit" name="value" value="-1" class="fa fa-sort-asc vote-button downvote-button"></button>
+      <span class='points'><%= @question.points %></span>
+      </form>
 <p>--COMMENTS--</p>
-<button>Add Comment</button>
+<form class='addcomment' method="post" action="/questions/<%=@question.id%>/comments" >
+  <input type=text name="content" placeholder="Your Comment">
+  <input id="submit" type="submit" name="submit" value="Add Comment" >
+</form>
+
 <% @question.comments.each do |comment| %>
 <article>
   <p class='username'>Author: <%= comment.commentator.user_name %><p>
@@ -14,8 +25,11 @@
 <%= erb(:'_answer') %>
 <% @question.answers.each do |answer| %>
   <article id="<%= answer.id %>">
-    <form method="post" action='/posts/<%= answer.id %>/vote' class="inline">
-      <button type="submit" name="submit_param" value="submit_value" class="fa fa-sort-desc vote-button upvote-button"></button>
+    <form method="post" action='/answers/<%= answer.id %>/votes' class="inline">
+      <button type="submit" name="value" value="1" class="fa fa-sort-desc vote-button upvote-button"></button>
+    </form>
+    <form method="post" action='/answers/<%= answer.id %>/votes' class="inline">
+      <button type="submit" name="value" value="-1" class="fa fa-sort-asc vote-button downvote-button"></button>
     </form>
       <span class='points'><%= answer.points %></span>
       <span class='username'><%= answer.answerer.user_name %></span>
@@ -27,7 +41,10 @@
     <article>
     <p> <%= acomment.content %></p>
     <p class='username'>Author: <%= acomment.commentator.user_name %></p>
-    <button>Add Comment</button>
   </article>
   <% end %>
+  <form class='addcomment' method="post" action="/answers/<%=answer.id%>/comments" >
+    <input type=text name="content" placeholder="Your Comment">
+    <input id="submit" type="submit" name="submit" value="Add Comment" >
+  </form>
 <% end %>
