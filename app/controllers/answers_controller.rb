@@ -6,17 +6,18 @@ post '/questions/:id/answers' do
   end
 end
 
-post '/answers/:id/comments' do
-	if session[:user_id]
-	  comment = Comment.new(commentator_id: session[:user_id], content: params[:content], commentable_id: params[:id], commentable_type: "Answer")
-	  if comment.save
-	    redirect "/questions/#{comment.commentable.question_id}"
-	  else 
-	    @error = "could not save comment for some reason"
-	  end
-	else
-		@error = "must be logged in to comment!"
+
+post '/answers/:id/votes' do
+  if session[:user_id]
+    vote = Vote.new(voter_id: session[:user_id], votable_id: params[:id], votable_type: "Answer", value: params[:value])
+    if vote.save
+      redirect "/questions/#{vote.votable_id}"
+    else
+      @error = "could not create vote for some reason"
+    end
+  else
+    @error = "must be logged in to vote!"
   end
   @questions = Question.all
-  erb :'/questions/index'
+  erb :'/qeustions/index'
 end
