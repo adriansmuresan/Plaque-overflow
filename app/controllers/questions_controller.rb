@@ -36,7 +36,6 @@ end
 delete '/questions/:id' do
   @question = Question.find_by(id: params[:id])
   @question.destroy
-  answers =
 
   # @q_answers = @question.answers
   # if @q_answers
