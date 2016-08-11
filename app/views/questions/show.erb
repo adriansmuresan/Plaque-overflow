@@ -2,7 +2,11 @@
 <h4><%= @question.asker.user_name  %></h4>
 <p><%= @question.content %></p>
 <p>--COMMENTS--</p>
-<button>Add Comment</button>
+<form class='addcomment' method="post" action="/questions/<%=@question.id%>/comments" >
+  <input type=text name="content" placeholder="Your Comment">
+  <input id="submit" type="submit" name="submit" value="Add Comment" >
+</form>
+
 <% @question.comments.each do |comment| %>
 <article>
   <p class='username'>Author: <%= comment.commentator.user_name %><p>
@@ -27,7 +31,10 @@
     <article>
     <p> <%= acomment.content %></p>
     <p class='username'>Author: <%= acomment.commentator.user_name %></p>
-    <button>Add Comment</button>
   </article>
   <% end %>
+  <form class='addcomment' method="post" action="/answers/<%=answer.id%>/comments" >
+    <input type=text name="content" placeholder="Your Comment">
+    <input id="submit" type="submit" name="submit" value="Add Comment" >
+  </form>
 <% end %>
