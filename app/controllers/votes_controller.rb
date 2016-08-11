@@ -28,7 +28,7 @@ post '/questions/:id/votes' do
           redirect "/questions/#{vote.votable_id}"
         end
       else
-        @error = "could not create vote for some reason"
+        @error = "could not create vote for some reason... and you are in questions!"
       end
     end
   else
@@ -46,7 +46,7 @@ post '/answers/:id/votes' do
     if oldvotes.length > 1
       @error = "OMG we already have multiple votes for this WTF"
     else
-      if oldvotes then oldvote = oldvotes[0] end
+       oldvote = oldvotes[0] if oldvotes
       end
       if oldvote && oldvote.value == params[:value].to_i
         @error = "you already voted that way on this item!"
@@ -67,8 +67,11 @@ post '/answers/:id/votes' do
         else
           redirect "/questions/#{vote.votable.question_id}"
         end
+        puts "\n\n\n\n"
+        p vote.errors.full_messages
+        put "\n\n\n\n\n"
       else
-        @error = "could not create vote for some reason"
+        @error = "this used to be the impossible error"
       end
     end
   else
