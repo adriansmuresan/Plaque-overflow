@@ -29,9 +29,15 @@ $(document).ready(function() {
       data: toSend
     })
     .done(function(response) {
-      console.log(response);
       $('.comment-container').append(response);
+      $($commentForm).val('')
     });
+  });
 
+  $('.display-answerbox').on('click', function(event) {
+    event.preventDefault();
+    /* Act on the event */
+    thisAnswerBox = $(this).siblings('.answerbox');
+    thisAnswerBox.toggleClass('hidden');
   });
 })

@@ -32,7 +32,9 @@
   </article>
   <% end %>
 </div>
+
 <p>--ANSWERS--</p>
+<button class='display-answerbox'>Post an answer</button>
 <%= erb(:'_answer') %>
 <% @question.answers.each do |answer| %>
   <article id="<%= answer.id %>">

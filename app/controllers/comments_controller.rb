@@ -18,7 +18,6 @@ post '/questions/:id/comments' do
     comment = Comment.new(commentator_id: session[:user_id], content: params[:content], commentable_id: params[:id], commentable_type: "Question")
     if  comment.save
       if request.xhr?
-        p "\n\n\n\n Request xhr n\nn\n\n\n\n"
         erb :_comment, layout: false, locals: { comment: comment }
       else
         redirect "/questions/#{comment.commentable_id}"
