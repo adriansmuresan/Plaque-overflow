@@ -82,10 +82,10 @@ article h2 {
 }
 
 article:before {
-  counter-increment: section;
+ /* counter-increment: section;*/
   color: #8C8C8C;
   font-size: 10pt;
-  content: counter(section) ". ";
+  /*content: counter(section) ". ";*/
 }
 
 article h2 a {
