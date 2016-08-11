@@ -1,20 +1,24 @@
 <h1><%= @question.title %></h1>
 <h4><%= @question.asker.user_name  %></h4>
 <p><%= @question.content %></p>
-<% if @question.asker.id == session[:user_id] %>
-  <a class='edit-delete' href="/questions/<%= @question.id %>/edit">Edit</a>
-  <form class = 'edit-delete' action='' method='post'>
-    <input type='hidden' name='_method' value='Delete'>
-    <input type='submit' value='delete'>
-  </form>
-<% end %>
+
+<div>
+  <% if @question.asker.id == session[:user_id] %>
+    <a class='edit-delete' href="/questions/<%= @question.id %>/edit">Edit</a>
+    <form class = 'edit-delete' action='' method='post'>
+      <input type='hidden' name='_method' value='Delete'>
+      <input type='submit' value='delete'>
+    </form>
+  <% end %>
+
    <form method="post" action='/questions/<%= @question.id %>/votes' class="inline">
-      <button type="submit" name="value" value="1" class="fa fa-sort-desc vote-button upvote-button <%= if @q_votes.length > 0 && @q_votes[0].value == 1 then "used_upvote" end %>" ></button>
+      <button type="submit" name="value" value="1" class="fa fa-sort-desc vote-button upvote-button <%= if @q_votes != nil && @q_votes.length > 0 && @q_votes[0].value == 1 then "used_upvote" end %>" ></button>
     </form>
     <form method="post" action='/questions/<%= @question.id %>/votes' class="inline">
-      <button type="submit" name="value" value="-1" class="fa fa-sort-asc vote-button downvote-button <%= if @q_votes.length > 0 && @q_votes[0].value == -1 then "used_downvote" end %>"></button>
+      <button type="submit" name="value" value="-1" class="fa fa-sort-asc vote-button downvote-button <%= if @q_votes != nil && @q_votes.length > 0 && @q_votes[0].value == -1 then "used_downvote" end %>"></button>
       <span class='points'><%= @question.points %></span>
     </form>
+</div>
 
 <p>--COMMENTS--</p>
 <div class='comment-section'>
@@ -38,9 +42,10 @@
 <%= erb(:'_answer', layout: false ) %>
 <% @question.answers.each do |answer| %>
   <article id="<%= answer.id %>">
+   <div>
     <form method="post" action='/answers/<%= answer.id %>/votes' class="inline">
       <button type="submit" name="value" value="1" class="fa fa-sort-desc vote-button upvote-button <%
-        if @filtered_a_votes.length > 0
+        if @filtered_a_votes != nil && @filtered_a_votes.length > 0
           @filtered_a_votes.each do |vote|
             if vote.value == 1 && vote.votable_id == answer.id%>
               used_upvote
@@ -50,15 +55,16 @@
     </form>
     <form method="post" action='/answers/<%= answer.id %>/votes' class="inline">
       <button type="submit" name="value" value="-1" class="fa fa-sort-asc vote-button downvote-button <%
-        if @filtered_a_votes.length > 0
+        if @filtered_a_votes != nil && @filtered_a_votes.length > 0
           @filtered_a_votes.each do |vote|
             if vote.value == -1 && vote.votable_id == answer.id%>
               used_downvote
             <%end
           end
         end %>"></button>
+    <span class='points'><%= answer.points %></span>
     </form>
-      <span class='points'><%= answer.points %></span>
+   </div>
       <span class='username'><%= answer.answerer.user_name %></span>
       <span class='timestamp'> Time since your post: <%= answer.time_since_creation %> hours</span>
   </article>
