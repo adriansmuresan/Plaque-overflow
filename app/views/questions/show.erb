@@ -35,7 +35,7 @@
 
 <p>--ANSWERS--</p>
 <button class='display-answerbox'>Post an answer</button>
-<%= erb(:'_answer') %>
+<%= erb(:'_answer', layout: false ) %>
 <% @question.answers.each do |answer| %>
   <article id="<%= answer.id %>">
     <form method="post" action='/answers/<%= answer.id %>/votes' class="inline">
