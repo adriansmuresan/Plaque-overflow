@@ -5,7 +5,7 @@
    <div>
     <form method="post" action='/questions/<%= question.id %>/votes' class="inline">
       <button type="submit" name="value" value="1" class="fa fa-sort-desc vote-button upvote-button <%
-        if question.votes.length > 0
+        if question.votes.any?
           question.votes.each do |vote|
           if vote.value == 1 && vote.voter_id == session[:user_id].to_i%>
             used_upvote
@@ -16,7 +16,7 @@
     </form>
     <form method="post" action='/questions/<%= question.id %>/votes' class="inline">
       <button type="submit" name="value" value="-1" class="fa fa-sort-asc vote-button downvote-button <%
-        if question.votes.length > 0
+        if question.votes.any?
           question.votes.each do |vote|
           if vote.value == -1 && vote.voter_id == session[:user_id].to_i%>
             used_downvote
