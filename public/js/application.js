@@ -66,7 +66,9 @@ $(document).ready(function() {
       data: toSend
     })
     .done(function(response) {
-      $('.comment-container').append(response);
+      var thisCommContain = $commentForm.parent();
+      console.log(thisCommContain);
+      $(thisCommContain).append(response);
       $($commentForm).val('')
     });
   });
