@@ -12,7 +12,7 @@
   </div>
 <p>--COMMENTS--</p>
 <form class='addcomment' method="post" action="/questions/<%=@question.id%>/comments" >
-  <input type=text name="content" placeholder="Your Comment">
+  <input type=text name="content" placeholder="Your Comment" required>
   <input id="submit" type="submit" name="submit" value="Add Comment" >
 </form>
 
@@ -62,7 +62,7 @@
   </article>
   <% end %>
   <form class='addcomment' method="post" action="/answers/<%=answer.id%>/comments" >
-    <input type=text name="content" placeholder="Your Comment">
+    <input type=text name="content" placeholder="Your Comment" required>
     <input id="submit" type="submit" name="submit" value="Add Comment" >
   </form>
 <% end %>
