@@ -15,21 +15,27 @@
       <button type="submit" name="value" value="-1" class="fa fa-sort-asc vote-button downvote-button <%= if @q_votes.length > 0 && @q_votes[0].value == -1 then "used_downvote" end %>"></button>
       <span class='points'><%= @question.points %></span>
     </form>
-<p>--COMMENTS--</p>
-<form class='addcomment' method="post" action="/questions/<%=@question.id%>/comments" >
-  <input type=text name="content" placeholder="Your Comment">
-  <input id="submit" type="submit" name="submit" value="Add Comment" >
-</form>
 
-<% @question.comments.each do |comment| %>
-<article>
-  <p class='username'>Author: <%= comment.commentator.user_name %><p>
-  <p> <%= comment.content %><p>
-</article>
-<% end %>
-<br>
+<p>--COMMENTS--</p>
+<div class='comment-section'>
+  <button class='display-commentbox'>Post a comment</button>
+  <form class='addcomment hidden' method="post" action="/questions/<%=@question.id%>/comments" >
+    <input type='text' name="content" placeholder="Your Comment">
+    <input id="submit" type="submit" name="submit" value="Add Comment" >
+  </form>
+</div>
+<div class='comment-container'>
+  <% @question.comments.each do |comment| %>
+  <article class='comment-bit'>
+    <p class='username'>Author: <%= comment.commentator.user_name %></p>
+    <p> <%= comment.content %></p>
+  </article>
+  <% end %>
+</div>
+
 <p>--ANSWERS--</p>
-<%= erb(:'_answer') %>
+<button class='display-answerbox'>Post an answer</button>
+<%= erb(:'_answer', layout: false ) %>
 <% @question.answers.each do |answer| %>
   <article id="<%= answer.id %>">
     <form method="post" action='/answers/<%= answer.id %>/votes' class="inline">
@@ -64,15 +70,18 @@
           <input type='submit' value='delete'>
         </form>
       <% end %>
-      <p>--------------- answer comments ------------</p>
+    <p>--------------- answer comments ------------</p>
     <% answer.comments.each do |acomment| %>
-    <article>
-    <p> <%= acomment.content %></p>
-    <p class='username'>Author: <%= acomment.commentator.user_name %></p>
-  </article>
-  <% end %>
-  <form class='addcomment' method="post" action="/answers/<%=answer.id%>/comments" >
-    <input type=text name="content" placeholder="Your Comment">
-    <input id="submit" type="submit" name="submit" value="Add Comment" >
-  </form>
+      <article>
+        <p> <%= acomment.content %></p>
+        <p class='username'>Author: <%= acomment.commentator.user_name %></p>
+      </article>
+    <% end %>
+  <div class='comment-section'>
+    <button class='display-commentbox'>Post a comment</button>
+    <form class='addcomment hidden' method="post" action="/answers/<%=answer.id%>/comments" >
+      <input type='text' name="content" placeholder="Your Comment">
+      <input id="submit" type="submit" name="submit" value="Add Comment" >
+    </form>
+  </div>
 <% end %>
