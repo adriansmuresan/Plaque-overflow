@@ -1,5 +1,5 @@
 <form action='/answers/<%= @answer.id %>' method='post'>
   <input type='hidden' name='_method' value='put'>
-  <textarea name='content'><%= @answer.try(:content) %></textarea>
+  <textarea name='content'><%= @answer.try(:content) %></textarea required>
   <input type='submit' value='edit'>
 </form>

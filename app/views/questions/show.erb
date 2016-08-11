@@ -20,7 +20,7 @@
 <div class='comment-section'>
   <button class='display-commentbox'>Post a comment</button>
   <form class='addcomment hidden' method="post" action="/questions/<%=@question.id%>/comments" >
-    <input type='text' name="content" placeholder="Your Comment">
+    <input type='text' name="content" placeholder="Your Comment" required>
     <input id="submit" type="submit" name="submit" value="Add Comment" >
   </form>
 </div>
@@ -80,7 +80,7 @@
   <div class='comment-section'>
     <button class='display-commentbox'>Post a comment</button>
     <form class='addcomment hidden' method="post" action="/answers/<%=answer.id%>/comments" >
-      <input type='text' name="content" placeholder="Your Comment">
+      <input type='text' name="content" placeholder="Your Comment" required>
       <input id="submit" type="submit" name="submit" value="Add Comment" >
     </form>
   </div>
