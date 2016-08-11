@@ -4,6 +4,8 @@ get '/questions' do
 end
 
 get '/questions/:id' do
+  @q_votes = []
+  @filtered_a_votes = []
   if session[:user_id]
     @q_votes = Vote.where(voter_id: session[:user_id], votable_id: params[:id], votable_type: "Question")
     a_votes = Vote.where(voter_id: session[:user_id], votable_type: "Answer")
@@ -48,6 +50,11 @@ end
 delete '/questions/:id' do
   @question = Question.find_by(id: params[:id])
   @question.destroy
+
+  # @q_answers = @question.answers
+  # if @q_answers
+  #   @q_answers.destroy
+  # end
   redirect '/questions'
 end
 

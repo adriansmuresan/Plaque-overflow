@@ -175,3 +175,10 @@ form#posts input[type='submit'] {
 .used_downvote{
   color: red;
 }
+
+.hidden{
+  display: none;
+}
+.an-answer{
+  margin-bottom: 1em;
+}
