@@ -18,21 +18,19 @@
 
   <title>Plaque Overflow</title>
 </head>
-<body>
+<body background="/images/2.jpg">
   <header>
-    <div>
-      <ul class="no-bullets no-margin no-padding right">
-        <% if session[:user_id] %>
-          <li class="pipe-separate left"><a href="/">home</a></li>
-          <li class="pipe-separate left"><a href="/users/<%= current_user.id %>"><%= current_user.user_name %></a></li>
-          <li class="pipe-separate left"><a href="/logout">logout</a></li>
-        <% else %>
-          <li class="pipe-separate left"><a href="/">home</a></li>
-          <li class="pipe-separate left"><a href="/users/new">register</a></li>
-          <li class="pipe-separate left"><a href="/login">login</a></li>
-        <% end %>
-      </ul>
-    </div>
+    <ul class="no-bullets right" id='nav-list'>
+      <% if session[:user_id] %>
+        <li class="pipe-separate left"><a href="/">home</a></li>
+        <li class="pipe-separate left"><a href="/users/<%= current_user.id %>"><%= current_user.user_name %></a></li>
+        <li class="pipe-separate left"><a href="/logout">logout</a></li>
+      <% else %>
+        <li class="pipe-separate left"><a href="/">home</a></li>
+        <li class="pipe-separate left"><a href="/users/new">register</a></li>
+        <li class="pipe-separate left"><a href="/login">login</a></li>
+      <% end %>
+    </ul>
   </header>
   <br>
 

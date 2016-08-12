@@ -6,14 +6,21 @@
 }
 /* nav bar */
 .pipe-separate {
+  padding-top: 1em;
   padding-left: 1em;
   padding-right: 1em;
-  border-right: 1px solid;
+  /*border-right: 1px solid;*/
 }
 
 /*remove bullets from nav bar*/
 .no-bullets {
   list-style-type: none;
+}
+
+/*try to move the nav bar up*/
+#nav-list{
+  margin: auto 0;
+  padding-bottom: 3em;
 }
 
 /*.pipe-separate:first-of-type {
@@ -29,6 +36,20 @@
   float: left;
 }
 
+#nav-list :visited {
+
+    color: #ff77aa;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+
+a:hover, a:active {
+    background-color: white;
+  }
+
 /* this is a temporary fix for making the best answer green */
 .best-answer {
   background-color: MediumAquaMarine;
@@ -36,16 +57,20 @@
 
 /* body */
 body {
-  counter-reset:section;
-  background-color: #F6F6EF;
+/*  background-image: "/images/Costume_Quest_2_Background_Tooth_Academy_Propaganda.jpg";
+*/  counter-reset:section;
+  background-color:   #d2d4dc;
   font-family: Verdana;
-  max-width: 700px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
 header {
-  background-color: #F4712D;
-  padding: 5px 5px;
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#e1f7d5), to(#a0d6b4));
+  /*background-color: #e1f7d5;*/
+  margin-top: 3em;
+  padding-bottom: 1px;
+  width: 100%;
 }
 
 header h1 {
@@ -72,7 +97,6 @@ header p a:nth-child(n + 2):before {
   margin: 5px 5px;
 }
 
-
 article a.vote-button {
   color: #8C8C8C;
   text-decoration: none;
@@ -88,7 +112,7 @@ article h2 {
 
 article:before {
  /* counter-increment: section;*/
-  color: #8C8C8C;
+  color: #ff77aa;
   font-size: 10pt;
   /*content: counter(section) ". ";*/
 }
@@ -126,7 +150,7 @@ article p span.comment-count:after {
 
 article p a.delete {
   text-decoration: none;
-  color: #8C8C8C;
+  color: #ff77aa;
   text-decoration: none;
 }
 
@@ -148,7 +172,7 @@ form#posts input[type='submit'] {
   margin-left: 5px;
   border-width: 1px;
   font-weight: bold;
-  background-color: #F4712D;
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#e1f7d5), to(#a0d6b4));
 }
 
 .inline {
@@ -174,11 +198,17 @@ form#posts input[type='submit'] {
 }
 
 .used_upvote{
-  color: green;
+  color: #028900;
 }
 
 .used_downvote{
-  color: red;
+  color: #ff0000;
+}
+
+.question-container{
+  padding: 1em;
+  border: 1px solid orange;
+  background: rgba(255,255,255, 0.7);
 }
 
 .hidden{
