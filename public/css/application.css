@@ -1,4 +1,5 @@
-
+@import url('https://fonts.googleapis.com/css?family=Uncial Antiqua');
+@import url('https://fonts.googleapis.com/css?family=Dekko');
 *, *:after, *:before {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -38,7 +39,7 @@
 
 #nav-list :visited {
 
-    color: #ff77aa;
+    color: #4d5d53;
     padding: 14px 25px;
     text-align: center;
     text-decoration: none;
@@ -54,10 +55,20 @@ a:hover, a:active {
 body {
 /*  background-image: "/images/Costume_Quest_2_Background_Tooth_Academy_Propaganda.jpg";
 */  counter-reset:section;
+  font-family: Dekko;
+  font_style; bold;
   background-color:   #d2d4dc;
   font-family: Verdana;
   max-width: 900px;
   margin: 0 auto;
+}
+
+h1 {
+  font-family: Uncial Antiqua;
+  text-align: center;
+  font-style: bold;
+  color:#745151;
+  font-size: 3.5em;
 }
 
 header {
@@ -163,7 +174,14 @@ form#posts input[type='text'] {
 
 }
 
-form#posts input[type='submit'] {
+form#posts, input[type='submit'] {
+  font-size: 10pt;
+  margin-left: 5px;
+  border-width: 1px;
+  font-weight: bold;
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#e1f7d5), to(#a0d6b4));
+}
+.clickstyle {
   font-size: 10pt;
   margin-left: 5px;
   border-width: 1px;
@@ -201,12 +219,22 @@ form#posts input[type='submit'] {
   color: #ff0000;
 }
 
-.question-container{
+.main-container{
   padding: 1em;
-  border: 1px solid orange;
+  border: 2px solid #372e29;
   background: rgba(255,255,255, 0.7);
 }
 
+.question_info {
+  color: #555555;
+   font-family: Rokkitt;
+   font-size: 1.5em;
+   font-style: bold;
+}
+
+.question-head{
+  border-top: 1px solid #2e4045;
+}
 
 
 
