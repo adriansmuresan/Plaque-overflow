@@ -11,9 +11,13 @@
 
 <p>Questions you've answered:</p>
 <ul>
+
+<% if @answers.any? %>
   <% @answers.each do |answer| %>
     <li><a href="/questions/<%= answer.question.id %>"><%= answer.question.title %></a></li>
   <% end %>
+<% end %>
+
 </ul>
 
 <!-- do we want to create a comments view link? -->

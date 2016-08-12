@@ -51,7 +51,12 @@ a:hover, a:active {
     background-color: white;
   }
 
+/* this is a temporary fix for making the best answer green */
+.best-answer {
+  background-color: MediumAquaMarine;
+}
 
+/* body */
 body {
 /*  background-image: "/images/Costume_Quest_2_Background_Tooth_Academy_Propaganda.jpg";
 */  counter-reset:section;
@@ -102,7 +107,6 @@ header p a:nth-child(n + 2):before {
  {
   margin: 5px 5px;
 }
-
 
 article a.vote-button {
   color: #8C8C8C;
@@ -224,7 +228,6 @@ form#posts, input[type='submit'] {
   border: 2px solid #372e29;
   background: rgba(255,255,255, 0.7);
 }
-
 .question_info {
   color: #555555;
    font-family: Rokkitt;
@@ -236,5 +239,10 @@ form#posts, input[type='submit'] {
   border-top: 1px solid #2e4045;
 }
 
-
+.hidden{
+  display: none;
+}
+.an-answer{
+  margin-bottom: 1em;
+}
 

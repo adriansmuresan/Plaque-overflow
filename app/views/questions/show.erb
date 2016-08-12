@@ -1,32 +1,47 @@
 <h1><%= @question.title %></h1>
 <h4><%= @question.asker.user_name  %></h4>
 <p><%= @question.content %></p>
-  <div>
+
+  <% if @question.asker.id == session[:user_id] %>
+    <a class='edit-delete' href="/questions/<%= @question.id %>/edit">Edit</a>
+    <form class = 'edit-delete' action='' method='post'>
+      <input type='hidden' name='_method' value='Delete'>
+      <input type='submit' value='delete'>
+    </form>
+  <% end %>
+
+<div>
    <form method="post" action='/questions/<%= @question.id %>/votes' class="inline">
       <button type="submit" name="value" value="1" class="fa fa-sort-desc vote-button upvote-button <%= if @q_votes != nil && @q_votes.length > 0 && @q_votes[0].value == 1 then "used_upvote" end %>" ></button>
     </form>
     <form method="post" action='/questions/<%= @question.id %>/votes' class="inline">
       <button type="submit" name="value" value="-1" class="fa fa-sort-asc vote-button downvote-button <%= if @q_votes != nil && @q_votes.length > 0 && @q_votes[0].value == -1 then "used_downvote" end %>"></button>
       <span class='points'><%= @question.points %></span>
-      </form>
-  </div>
-<p>--COMMENTS--</p>
-<form class='addcomment' method="post" action="/questions/<%=@question.id%>/comments" >
-  <input type=text name="content" placeholder="Your Comment" required>
-  <input class="clickstyle" id="submit" type="submit" name="submit" value="Add Comment" >
-</form>
+    </form>
+</div>
 
-<% @question.comments.each do |comment| %>
-<article>
-  <p class='username'>Author: <%= comment.commentator.user_name %><p>
-  <p> <%= comment.content %><p>
-</article>
-<% end %>
-<br>
+<p>--COMMENTS--</p>
+<div class='comment-section'>
+  <button class='display-commentbox'>Post a comment</button>
+  <form class='addcomment hidden' method="post" action="/questions/<%=@question.id%>/comments" >
+    <input type='text' name="content" placeholder="Your Comment" required>
+    <input class="clickstyle" id="submit" type="submit" name="submit" value="Add Comment" >
+  </form>
+</div>
+<div class='comment-container'>
+  <% @question.comments.each do |comment| %>
+  <article class='comment-bit'>
+    <p class='username'>Author: <%= comment.commentator.user_name %></p>
+    <p> <%= comment.content %></p>
+  </article>
+  <% end %>
+</div>
+
 <p>--ANSWERS--</p>
-<%= erb(:'_answer') %>
+<button class='display-answerbox'>Post an answer</button>
+<%= erb(:'_answer', layout: false ) %>
 <% @question.answers.each do |answer| %>
-  <article id="<%= answer.id %>" class='question-head'>
+  <article id="<%= answer.id %>" class='question-head <%= if answer.id == @question.best_answer_id then best-answer end %>'>
    <div>
     <form method="post" action='/answers/<%= answer.id %>/votes' class="inline">
       <button type="submit" name="value" value="1" class="fa fa-sort-desc vote-button upvote-button <%
@@ -54,15 +69,35 @@
       <span class='timestamp'> Time since your post: <%= answer.time_since_creation %> hours</span>
   </article>
       <p> <%= answer.content %></p>
-      <p>--------------- answer comments ------------</p>
-    <% answer.comments.each do |acomment| %>
-    <article>
-    <p> <%= acomment.content %></p>
-    <p class='username'>Author: <%= acomment.commentator.user_name %></p>
-  </article>
-  <% end %>
-  <form class='addcomment' method="post" action="/answers/<%=answer.id%>/comments" >
-    <input type=text name="content" placeholder="Your Comment" required>
-    <input id="submit" type="submit" name="submit" value="Add Comment" >
-  </form>
+      <% if answer.answerer_id == session[:user_id] %>
+        <a href="/answers/<%= answer.id %>/edit">Edit</a>
+        <form class = 'edit-delete' action='/answers/<%= answer.id %>' method='post'>
+          <input type='hidden' name='_method' value='Delete'>
+          <input type='submit' value='delete'>
+        </form>
+      <% end %>
+      <% if @question.asker_id == session[:user_id] %>
+        <form class = 'make-favourite' action="/questions/<%= @question.id %>/answers/<%= answer.id %>/make_favorite" method='post'>
+          <input type='hidden' name='_method' value='PUT'>
+          <input type='submit' value='Choose Favourite'>
+        </form>
+      <% end %>
+    <p>--------------- answer comments ------------</p>
+
+  <div class='comment-section'>
+    <button class='display-commentbox'>Post a comment</button>
+    <form class='addcomment hidden' method="post" action="/answers/<%=answer.id%>/comments" >
+      <input type='text' name="content" placeholder="Your Comment" required>
+      <input id="submit" type="submit" name="submit" value="Add Comment" >
+    </form>
+  </div>
+
+      <% answer.comments.each do |acomment| %>
+    <div class='comment-container'></div>
+      <article class='comment-bit'>
+        <p> <%= acomment.content %></p>
+        <p class='username'>Author: <%= acomment.commentator.user_name %></p>
+      </article>
+    </div>
+    <% end %>
 <% end %>
