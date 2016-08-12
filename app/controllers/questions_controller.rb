@@ -50,15 +50,17 @@ end
 delete '/questions/:id' do
   @question = Question.find_by(id: params[:id])
   @question.destroy
-
-  # @q_answers = @question.answers
-  # if @q_answers
-  #   @q_answers.destroy
-  # end
   redirect '/questions'
 end
 
 get '/questions/:id/edit' do
   @question = Question.find_by(id: params[:id])
   erb :'/questions/edit'
+end
+
+put '/questions/:q_id/answers/:a_id/make_favorite' do
+  @question = Question.find(params[:q_id])
+  @question.best_answer_id = params[:a_id]
+  @question.save
+  redirect "/questions/#{@question.id}"
 end

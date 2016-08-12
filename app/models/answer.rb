@@ -4,6 +4,7 @@ class Answer < ActiveRecord::Base
   belongs_to	:question
   has_many		:votes, { as: :votable }
   has_many		:comments, { as: :commentable }
+  #belongs_to  :question, { foreign_key: :best_answer_id}
 
   def points
     votes.sum(:value)
