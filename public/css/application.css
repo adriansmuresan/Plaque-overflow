@@ -50,7 +50,12 @@ a:hover, a:active {
     background-color: white;
   }
 
+/* this is a temporary fix for making the best answer green */
+.best-answer {
+  background-color: MediumAquaMarine;
+}
 
+/* body */
 body {
 /*  background-image: "/images/Costume_Quest_2_Background_Tooth_Academy_Propaganda.jpg";
 */  counter-reset:section;
@@ -91,7 +96,6 @@ header p a:nth-child(n + 2):before {
  {
   margin: 5px 5px;
 }
-
 
 article a.vote-button {
   color: #8C8C8C;
@@ -207,6 +211,9 @@ form#posts input[type='submit'] {
   background: rgba(255,255,255, 0.7);
 }
 
-
-
-
+.hidden{
+  display: none;
+}
+.an-answer{
+  margin-bottom: 1em;
+}

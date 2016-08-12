@@ -4,6 +4,8 @@ get '/questions' do
 end
 
 get '/questions/:id' do
+  @q_votes = []
+  @filtered_a_votes = []
   if session[:user_id]
     @q_votes = Vote.where(voter_id: session[:user_id], votable_id: params[:id], votable_type: "Question")
     a_votes = Vote.where(voter_id: session[:user_id], votable_type: "Answer")
@@ -39,4 +41,26 @@ post '/questions' do
   erb :'/questions/index'
 end
 
+put '/questions/:id' do
+  @question = Question.find_by(id: params[:id])
+  @question.update(content: params[:content], title: params[:title])
+  redirect "/questions/#{ @question.id }"
+end
 
+delete '/questions/:id' do
+  @question = Question.find_by(id: params[:id])
+  @question.destroy
+  redirect '/questions'
+end
+
+get '/questions/:id/edit' do
+  @question = Question.find_by(id: params[:id])
+  erb :'/questions/edit'
+end
+
+put '/questions/:q_id/answers/:a_id/make_favorite' do
+  @question = Question.find(params[:q_id])
+  @question.best_answer_id = params[:a_id]
+  @question.save
+  redirect "/questions/#{@question.id}"
+end
