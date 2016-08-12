@@ -25,7 +25,7 @@
   <button class='display-commentbox'>Post a comment</button>
   <form class='addcomment hidden' method="post" action="/questions/<%=@question.id%>/comments" >
     <input type='text' name="content" placeholder="Your Comment" required>
-    <input id="submit" type="submit" name="submit" value="Add Comment" >
+    <input class="clickstyle" id="submit" type="submit" name="submit" value="Add Comment" >
   </form>
 </div>
 <div class='comment-container'>
@@ -41,7 +41,7 @@
 <button class='display-answerbox'>Post an answer</button>
 <%= erb(:'_answer', layout: false ) %>
 <% @question.answers.each do |answer| %>
-  <article id="<%= answer.id %>" <%= if answer.id == @question.best_answer_id then "class='best-answer'" end %>>
+  <article id="<%= answer.id %>" class='question-head <%= if answer.id == @question.best_answer_id then best-answer end %>'>
    <div>
     <form method="post" action='/answers/<%= answer.id %>/votes' class="inline">
       <button type="submit" name="value" value="1" class="fa fa-sort-desc vote-button upvote-button <%

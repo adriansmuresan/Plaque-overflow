@@ -17,8 +17,10 @@
   <script src="/js/application.js"></script>
 
   <title>Plaque Overflow</title>
+  <h1>Plaque Overflow</h1>
 </head>
 <body background="/images/2.jpg">
+  <main class='main-container'>
   <header>
     <ul class="no-bullets right" id='nav-list'>
       <% if session[:user_id] %>
@@ -36,5 +38,6 @@
 
 
   <%= yield %>
+</main>
 </body>
 </html>

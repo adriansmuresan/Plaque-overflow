@@ -1,7 +1,7 @@
 <div class='question-container'>
   <% @questions.each do |question| %>
 
-    <article id="<%= question.id %>">
+    <article id="<%= question.id %>" class='question-head'>
    <div>
     <form method="post" action='/questions/<%= question.id %>/votes' class="inline">
       <button type="submit" name="value" value="1" class="fa fa-sort-desc vote-button upvote-button <%
@@ -28,9 +28,10 @@
      </div>
       <h2><a href='/questions/<%= question.id %>'><%= question.title %></a></h2>
       <p>
-        <span class='username'><%= question.asker.user_name %></span>
-        <span class='timestamp'><%= question.time_since_creation %></span>
-        <span class='comment-count'><%= question.comments.count %></span>
+        <span class='username question_info'><%= question.asker.user_name %></span>
+        <span class='timestamp question_info'><%= question.time_since_creation %></span>
+        <span class='comment-count question_info'><%= question.comments.count %></span>
+        <a class="delete question_info" href='/posts/<%= question.id %>'></a>
       </p>
     </article>
 
