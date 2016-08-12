@@ -29,6 +29,11 @@
   float: left;
 }
 
+/* this is a temporary fix for making the best answer green */
+.best-answer {
+  background-color: MediumAquaMarine;
+}
+
 /* body */
 body {
   counter-reset:section;

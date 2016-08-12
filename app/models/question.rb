@@ -4,6 +4,7 @@ class Question < ActiveRecord::Base
   has_many		:answers, dependent: :destroy
   has_many		:votes, { as: :votable }
   has_many		:comments, { as: :commentable }
+  #has_one     :best_answer, { class_name: 'Answer'}
 
   validates   :title, :content, :asker, {presence: true}
 
